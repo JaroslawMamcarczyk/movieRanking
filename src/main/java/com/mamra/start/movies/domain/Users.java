@@ -19,4 +19,6 @@ public class Users {
     private String name;
     @NonNull
     private String password;
+    @OneToOne(mappedBy = "rankingCreator")
+    private Ranking creatorRanking;
 }

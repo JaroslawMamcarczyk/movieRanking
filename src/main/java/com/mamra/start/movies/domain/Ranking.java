@@ -5,19 +5,21 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 
+
 @Entity
-@Setter
-@Getter
-@NoArgsConstructor
-@ToString
 @AllArgsConstructor
-public class Movie {
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int phase;
-    @ManyToMany
-    private List<Ranking> movieRanking;
+    private String rankingCategory;
+    @OneToOne
+    private Users rankingCreator;
+    @ManyToMany(mappedBy = "movieRanking")
+    private List<Movie> rankingMovie;
 
 }
