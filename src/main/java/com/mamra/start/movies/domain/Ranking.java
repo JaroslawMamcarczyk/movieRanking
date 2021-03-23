@@ -18,8 +18,9 @@ public class Ranking {
     private Long id;
     private String rankingCategory;
     @OneToOne
-    private Users rankingCreator;
+    private User rankingCreator;
     @ManyToMany(mappedBy = "movieRanking")
     private List<Movie> rankingMovie;
+
 
 }

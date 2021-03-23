@@ -36,11 +36,7 @@ private ObjectMapper objectMapper;
 
     @PostMapping("/movie/add")
     public ResponseEntity addMovie(@RequestBody Movie movie) throws JsonProcessingException {
-        boolean isAdded = movieService.addMovie(movie);
-        String dontFound = "nie znaleziono obiektu";
-        if(isAdded=true)
-        return ResponseEntity.ok(objectMapper.writeValueAsString(movie));
-        else
-            return ResponseEntity.ok(objectMapper.writeValueAsString(movie));
+        String isAdded = movieService.addMovie(movie);
+        return ResponseEntity.ok(isAdded);
     }
 }
