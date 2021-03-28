@@ -28,17 +28,17 @@ public class MovieService {
     }
 
     public String addMovie(Movie movie){
-        Optional<Movie> movieFromDb = movieRepository.findByName(movie.getName());
+        Optional<Movie> movieFromDb = movieRepository.findByTitle(movie.getTitle());
         if(movieFromDb.isPresent()){
             return "Nie można zapisać";
         }else {
             movieRepository.save(movie);
-            return movie.getName()+" został zapisany";
+            return movie.getTitle()+" został zapisany";
         }
     }
 
     public boolean deleteMovie(Movie movie){
-        Optional<Movie> movieFromDb = movieRepository.findByName(movie.getName());
+        Optional<Movie> movieFromDb = movieRepository.findByTitle(movie.getTitle());
         if(movieFromDb.isPresent()){
             movieRepository.delete(movie);
             return true;

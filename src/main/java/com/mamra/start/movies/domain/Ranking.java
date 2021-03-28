@@ -17,10 +17,6 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rankingCategory;
-    @OneToOne
-    private User rankingCreator;
     @ManyToMany(mappedBy = "movieRanking")
     private List<Movie> rankingMovie;
-
-
 }

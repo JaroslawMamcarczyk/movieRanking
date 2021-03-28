@@ -15,8 +15,9 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private int phase;
+    private String title;
+    private String logo;
+    private int year;
     @ManyToMany
     private List<Ranking> movieRanking;
 
