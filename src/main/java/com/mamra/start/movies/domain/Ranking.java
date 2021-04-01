@@ -1,9 +1,11 @@
 package com.mamra.start.movies.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,4 +21,8 @@ public class Ranking {
     private String rankingCategory;
     @ManyToMany(mappedBy = "movieRanking")
     private List<Movie> rankingMovie;
+    @JsonIgnore
+    @OneToMany(mappedBy = "ranking")
+    private Set<Battle> battleSet;
+    private int winner;
 }

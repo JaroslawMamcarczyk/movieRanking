@@ -1,5 +1,6 @@
 package com.mamra.start.movies.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Movie {
     private String title;
     private String logo;
     private int year;
+    @JsonIgnore
     @ManyToMany
     private List<Ranking> movieRanking;
 
