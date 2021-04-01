@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -22,5 +23,8 @@ public class Movie {
     @JsonIgnore
     @ManyToMany
     private List<Ranking> movieRanking;
-
+  //  @OneToMany(mappedBy = "firstMovie")
+  //  private List <Battle> battle;
+   // @OneToMany(mappedBy = "secondMovie")
+   // private List <Battle> battleSecond;
 }
