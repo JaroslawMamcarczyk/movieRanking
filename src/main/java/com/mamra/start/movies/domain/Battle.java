@@ -24,4 +24,5 @@ public class Battle {
     private Movie secondMovie;
     @ManyToOne
     private Ranking ranking;
+    private int winner;
 }

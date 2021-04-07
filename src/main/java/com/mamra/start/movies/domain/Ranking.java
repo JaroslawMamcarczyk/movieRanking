@@ -19,10 +19,11 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rankingCategory;
+    private String description;
     @ManyToMany(mappedBy = "movieRanking")
     private List<Movie> rankingMovie;
     @JsonIgnore
     @OneToMany(mappedBy = "ranking")
     private Set<Battle> battleSet;
-    private int winner;
+
 }

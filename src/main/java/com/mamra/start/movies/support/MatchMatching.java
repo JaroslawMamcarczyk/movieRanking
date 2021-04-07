@@ -26,8 +26,8 @@ public class MatchMatching {
     private Ranking ranking;
 
     public MatchMatching(Long id) {
-        if (rankingService.getRankingById(id).isPresent()) {
-            ranking = rankingService.getRankingById(id).get();
+        if (rankingService.getRankingById(id)!=null) {
+            ranking = rankingService.getRankingById(id);
             listMovie = ranking.getRankingMovie();
             movie = randomMovie(listMovie);
             opponent = randomMovie(createOpponentsList(movie));

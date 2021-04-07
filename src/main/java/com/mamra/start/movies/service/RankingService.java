@@ -29,11 +29,12 @@ public String adRanking(Ranking ranking){
         rankingRepository.save(ranking);
         return ranking.getRankingCategory()+" został stworzony";
     }
+
 }
 
-public Optional<Ranking> getRankingById(Long id){
+public Ranking getRankingById(Long id){
     Optional<Ranking> ranking = rankingRepository.findById(id);
-    return ranking;
+    return ranking.orElse(null);
 }
 
 }
