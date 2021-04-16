@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+
 @RestController
 public class RankingApi {
     @Autowired
     ObjectMapper objectMapper;
     @Autowired
     RankingService rankingService;
-
+    @CrossOrigin
     @GetMapping("/ranking")
     public ResponseEntity getRanking() throws JsonProcessingException {
         List<Ranking> list = rankingService.getRanking();
 return ResponseEntity.ok(objectMapper.writeValueAsString(list));
     }
 
-    @PostMapping("/ranking")
+    @PostMapping("/addRanking")
     public ResponseEntity addRanking(@RequestBody Ranking ranking){
         String response = rankingService.adRanking(ranking);
         return ResponseEntity.ok(response);
     }
-
+    @CrossOrigin
     @RequestMapping("/ranking/{id}")
     public ResponseEntity getRankingById(@RequestParam Long id) throws JsonProcessingException {
        return ResponseEntity.ok(objectMapper.writeValueAsString(rankingService.getRankingById(id))) ;
