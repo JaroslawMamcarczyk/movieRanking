@@ -27,4 +27,11 @@ public class Movie {
   //  private List <Battle> battle;
    // @OneToMany(mappedBy = "secondMovie")
    // private List <Battle> battleSecond;
+
+
+    public Movie(String title, String logo, int year) {
+        this.title = title;
+        this.logo = logo;
+        this.year = year;
+    }
 }

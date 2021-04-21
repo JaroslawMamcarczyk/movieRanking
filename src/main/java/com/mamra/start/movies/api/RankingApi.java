@@ -2,12 +2,14 @@ package com.mamra.start.movies.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mamra.start.movies.api.response.RankingResponse;
 import com.mamra.start.movies.domain.Ranking;
 import com.mamra.start.movies.service.RankingService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -24,11 +26,13 @@ public class RankingApi {
         List<Ranking> list = rankingService.getRanking();
 return ResponseEntity.ok(objectMapper.writeValueAsString(list));
     }
-
-    @PostMapping("/addRanking")
-    public ResponseEntity addRanking(@RequestBody Ranking ranking){
-        String response = rankingService.adRanking(ranking);
-        return ResponseEntity.ok(response);
+@CrossOrigin
+    @PostMapping("/ranking/add")
+    public ResponseEntity addRanking(@RequestBody RankingResponse response){
+        Ranking rank = new Ranking(response.getRankingCategory(), response.getDescription());
+        System.out.println(response.getRankingCategory());
+        //rankingService.addRanking(rank);
+        return ResponseEntity.ok(rank);
     }
     @CrossOrigin
     @RequestMapping("/ranking/{id}")

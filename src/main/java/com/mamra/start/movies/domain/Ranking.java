@@ -26,4 +26,8 @@ public class Ranking {
     @OneToMany(mappedBy = "ranking")
     private Set<Battle> battleSet;
 
+    public Ranking(String rankingCategory, String description) {
+        this.rankingCategory = rankingCategory;
+        this.description = description;
+    }
 }

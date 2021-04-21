@@ -2,6 +2,7 @@ package com.mamra.start.movies.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mamra.start.movies.api.response.MovieResponse;
 import com.mamra.start.movies.domain.Movie;
 import com.mamra.start.movies.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,11 @@ private ObjectMapper objectMapper;
         Optional<Movie> movie = movieService.getMovieById(id);
         return ResponseEntity.ok(objectMapper.writeValueAsString(movie));
     }
-
+@CrossOrigin
     @PostMapping("/movie/add")
-    public ResponseEntity addMovie(@RequestBody Movie movie) throws JsonProcessingException {
-        String isAdded = movieService.addMovie(movie);
+    public ResponseEntity addMovie(@RequestBody MovieResponse movie) throws JsonProcessingException {
+        Movie newMovie = new Movie(movie.getTitle(),movie.getLogo(), movie.getYear());
+        String isAdded = movieService.addMovie(newMovie);
         return ResponseEntity.ok(isAdded);
     }
 }
