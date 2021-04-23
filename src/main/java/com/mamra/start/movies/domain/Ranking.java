@@ -15,21 +15,26 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
+@Table(name="rankings")
 public class Ranking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String rankingCategory;
     private String description;
-    @ManyToMany(mappedBy = "movieRanking")
+    @ManyToMany()
+    @JoinTable(
+            name="movies_rankings",
+            joinColumns = {@JoinColumn(name="id_movies")},
+            inverseJoinColumns = {@JoinColumn(name="id_rankings")}
+    )
     private List<Movie> rankingMovie;
     @JsonIgnore
     @OneToMany(mappedBy = "ranking")
     private Set<Battle> battleSet;
 
-    public Ranking(String rankingCategory, String description, List<Movie> list) {
+    public Ranking(String rankingCategory, String description) {
         this.rankingCategory = rankingCategory;
         this.description = description;
-        this.rankingMovie = new ArrayList<>(list);
     }
 }
