@@ -37,10 +37,10 @@ public class MovieService {
         }
     }
 
-    public boolean deleteMovie(Movie movie){
-        Optional<Movie> movieFromDb = movieRepository.findByTitle(movie.getTitle());
+    public boolean deleteMovie(Long id){
+        Optional<Movie> movieFromDb = movieRepository.findById(id);
         if(movieFromDb.isPresent()){
-            movieRepository.delete(movie);
+            movieRepository.delete(movieFromDb.get());
             return true;
         }else{
             return false;

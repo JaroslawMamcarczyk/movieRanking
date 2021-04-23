@@ -39,21 +39,9 @@ public class BattleApi {
     @GetMapping("/battle/{}")
     public ResponseEntity createBattle(@RequestParam Long id) throws  JsonProcessingException{
         Movie [] movieTable = new Movie[2];
-        MatchMatching matchMatching = new MatchMatching(id);
+        MatchMatching matchMatching = new MatchMatching(id, rankingService, battleService);
         movieTable[0] = matchMatching.getMovie();
         movieTable[1] = matchMatching.getOpponent();
         return ResponseEntity.ok(objectMapper.writeValueAsString(movieTable));
     }
-
-    @CrossOrigin
-    @GetMapping("/test/{}")
-    public ResponseEntity test(@RequestParam Long id) throws JsonProcessingException{
-    // List<Battle> list =  battleService.findBattleForRankingAndMovie(rankingService.getRankingById(id).get(), movieService.getMovieById(id).get());
-    MatchMatching matchMatching = new MatchMatching(id);
-    List<Movie> movieList = new ArrayList<>();
-    movieList.add(matchMatching.getMovie());
-    movieList.add(matchMatching.getOpponent());
-        return ResponseEntity.ok(objectMapper.writeValueAsString(movieList));
-    }
-
 }

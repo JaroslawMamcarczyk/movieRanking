@@ -15,43 +15,42 @@ import java.util.Random;
 @Getter
 @Setter
 public class MatchMatching {
-    @Autowired
     BattleService battleService;
-    @Autowired
     RankingService rankingService;
 
     private List<Movie> listMovie;
     private  Movie movie;
     private Movie opponent;
     private Ranking ranking;
+    private  List<Battle> battleList;
 
-    public MatchMatching(Long id) {
+    public MatchMatching(Long id,RankingService rankingService,BattleService battleService) {
+        this.battleService = battleService;
+        this.rankingService = rankingService;
         if (rankingService.getRankingById(id)!=null) {
             ranking = rankingService.getRankingById(id);
             listMovie = ranking.getRankingMovie();
             movie = randomMovie(listMovie);
             opponent = randomMovie(createOpponentsList(movie));
+            System.out.println("Gospodarz:"+movie.getTitle());
+            System.out.println("Przeciwnik:"+opponent.getTitle());
         }
     }
 
     public Movie randomMovie(List<Movie> list){
-        Random random = new Random(list.size());
-        return list.get(random.nextInt());
+        Random random = new Random();
+        return list.get(random.nextInt(list.size()));
     }
 
     public List<Movie> createOpponentsList(Movie movie){
-        List<Movie> movieList = new ArrayList<>();
-        List<Movie> opponentList = new ArrayList<>(movieList);
-       List<Battle> battleList = battleService.findBattleForRankingAndMovie(ranking,movie);
-            for (Battle battle:battleList) {
-               if(battle.getFirstMovie().equals(movie)){
-                   movieList.add(battle.getSecondMovie());
-               }else{
-                   movieList.add(battle.getFirstMovie());
-               }
-            }
-        movieList.add(movie);
-        opponentList.removeAll(movieList);
-        return opponentList;
+        List<Movie> opponentsList = new ArrayList(listMovie);
+        opponentsList.remove(movie);
+        battleList = battleService.findBattleForRankingAndMovie(ranking,movie);
+        for (Battle battle:battleList
+             ) {
+            opponentsList.remove(battle.getFirstMovie());
+            opponentsList.remove(battle.getSecondMovie());
+        }
+        return opponentsList;
     }
 }

@@ -23,10 +23,12 @@ public class Movie {
     @JsonIgnore
     @ManyToMany
     private List<Ranking> movieRanking;
-  //  @OneToMany(mappedBy = "firstMovie")
-  //  private List <Battle> battle;
-   // @OneToMany(mappedBy = "secondMovie")
-   // private List <Battle> battleSecond;
+    @JsonIgnore
+    @OneToMany(mappedBy = "firstMovie")
+    private List <Battle> battle;
+    @JsonIgnore
+    @OneToMany(mappedBy = "secondMovie")
+    private List <Battle> battleSecond;
 
 
     public Movie(String title, String logo, int year) {

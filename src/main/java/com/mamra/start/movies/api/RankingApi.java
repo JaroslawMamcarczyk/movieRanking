@@ -5,11 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mamra.start.movies.api.response.RankingResponse;
 import com.mamra.start.movies.domain.Ranking;
 import com.mamra.start.movies.service.RankingService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+
 
 import java.util.List;
 
@@ -28,10 +27,10 @@ return ResponseEntity.ok(objectMapper.writeValueAsString(list));
     }
 @CrossOrigin
     @PostMapping("/ranking/add")
-    public ResponseEntity addRanking(@RequestBody RankingResponse response){
-        Ranking rank = new Ranking(response.getRankingCategory(), response.getDescription());
-        System.out.println(response.getRankingCategory());
-        //rankingService.addRanking(rank);
+    public ResponseEntity addRanking(@RequestBody RankingResponse response) throws JsonProcessingException{
+        Ranking rank = new Ranking(response.getRankingCategory(), response.getDescription(), response.getRankingMovie());
+    System.out.println(rank.getRankingMovie());
+        rankingService.addRanking(rank);
         return ResponseEntity.ok(rank);
     }
     @CrossOrigin

@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class RankingResponse {
-    private String rankingCategory;
     private String description;
+    private String rankingCategory;
+    private List<Movie> rankingMovie;
 }

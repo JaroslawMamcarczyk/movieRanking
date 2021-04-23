@@ -21,6 +21,7 @@ RankingService(RankingRepository rankingRepository){
 public List<Ranking> getRanking(){
   return  rankingRepository.findAll();
 }
+
 @CrossOrigin
 public String addRanking(Ranking ranking){
         rankingRepository.save(ranking);
@@ -30,7 +31,7 @@ public String addRanking(Ranking ranking){
 
 public Ranking getRankingById(Long id){
     Optional<Ranking> ranking = rankingRepository.findById(id);
-    return ranking.orElse(null);
+    return ranking.get();
 }
 
 }

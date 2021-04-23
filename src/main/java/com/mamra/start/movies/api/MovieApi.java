@@ -6,6 +6,7 @@ import com.mamra.start.movies.api.response.MovieResponse;
 import com.mamra.start.movies.domain.Movie;
 import com.mamra.start.movies.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
@@ -40,5 +41,16 @@ private ObjectMapper objectMapper;
         Movie newMovie = new Movie(movie.getTitle(),movie.getLogo(), movie.getYear());
         String isAdded = movieService.addMovie(newMovie);
         return ResponseEntity.ok(isAdded);
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/deleteMovie/id/{}")
+    public ResponseEntity deleteMovie(@RequestParam Long id) throws  JsonProcessingException{
+       boolean isDelete = movieService.deleteMovie(id);
+       if(isDelete){
+           return ResponseEntity.ok("isDelete");
+       }else{
+           return ResponseEntity.ok("brak filmu");
+       }
     }
 }

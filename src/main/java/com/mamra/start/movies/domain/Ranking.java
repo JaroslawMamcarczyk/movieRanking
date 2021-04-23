@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,8 +27,9 @@ public class Ranking {
     @OneToMany(mappedBy = "ranking")
     private Set<Battle> battleSet;
 
-    public Ranking(String rankingCategory, String description) {
+    public Ranking(String rankingCategory, String description, List<Movie> list) {
         this.rankingCategory = rankingCategory;
         this.description = description;
+        this.rankingMovie = new ArrayList<>(list);
     }
 }
