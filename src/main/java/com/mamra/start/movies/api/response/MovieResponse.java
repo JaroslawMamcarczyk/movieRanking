@@ -11,6 +11,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @AllArgsConstructor
 public class MovieResponse {
     private String title;
-    private String logo;
     private int year;
 }

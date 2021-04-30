@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Setter
@@ -22,8 +21,8 @@ public class Movie {
     private String title;
     private int year;
     @JsonIgnore
-    @ManyToMany
-    private List<Ranking> movieRanking;
+    @ManyToMany(mappedBy = "rankingMovie")
+    private List<Ranking> rankingMovies;
     @JsonIgnore
     @OneToMany(mappedBy = "firstMovie")
     private List <Battle> battle;
@@ -35,6 +34,6 @@ public class Movie {
     public Movie(String title, int year) {
         this.title = title;
         this.year = year;
-        this.movieRanking = new ArrayList<>();
+        this.rankingMovies = new ArrayList<>();
     }
 }

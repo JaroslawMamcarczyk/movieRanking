@@ -38,7 +38,7 @@ private ObjectMapper objectMapper;
 @CrossOrigin
     @PostMapping("/movie/add")
     public ResponseEntity addMovie(@RequestBody MovieResponse movie) throws JsonProcessingException {
-        Movie newMovie = new Movie(movie.getTitle(),movie.getLogo(), movie.getYear());
+        Movie newMovie = new Movie(movie.getTitle(), movie.getYear());
         String isAdded = movieService.addMovie(newMovie);
         return ResponseEntity.ok(isAdded);
     }

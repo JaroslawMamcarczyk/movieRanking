@@ -31,15 +31,8 @@ return ResponseEntity.ok(objectMapper.writeValueAsString(list));
     @PostMapping("/ranking/add")
     public ResponseEntity addRanking(@RequestBody RankingResponse response) throws JsonProcessingException{
         Ranking rank = new Ranking(response.getRankingCategory(), response.getDescription());
-    rank.setRankingMovie(new ArrayList<>());
     for (Movie movie:response.getRankingMovie()) {
-        rank.getRankingMovie().add(movie);
-        if(movie.getMovieRanking()!=null) {
-            movie.getMovieRanking().add(rank);
-        }else{
-            movie.setMovieRanking(new ArrayList<>());
-            movie.getMovieRanking().add(rank);
-        }
+        rank.addMovies(movie);
     }
         rankingService.addRanking(rank);
         return ResponseEntity.ok(rank);

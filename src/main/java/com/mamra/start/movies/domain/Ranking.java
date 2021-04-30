@@ -25,8 +25,8 @@ public class Ranking {
     @ManyToMany()
     @JoinTable(
             name="movies_rankings",
-            joinColumns = {@JoinColumn(name="id_movies")},
-            inverseJoinColumns = {@JoinColumn(name="id_rankings")}
+            joinColumns = {@JoinColumn(name="id_rankings")},
+            inverseJoinColumns = {@JoinColumn(name="id_movies")}
     )
     private List<Movie> rankingMovie;
     @JsonIgnore
@@ -36,5 +36,12 @@ public class Ranking {
     public Ranking(String rankingCategory, String description) {
         this.rankingCategory = rankingCategory;
         this.description = description;
+        this.rankingMovie = new ArrayList<>();
+    }
+
+    public void addMovies(Movie movies){
+        this.rankingMovie.add(movies);
+        if(movies.getRankingMovies()!=null)
+        movies.getRankingMovies().add(this);
     }
 }
