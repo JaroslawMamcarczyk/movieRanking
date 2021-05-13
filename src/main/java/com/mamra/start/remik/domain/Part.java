@@ -19,6 +19,7 @@ public class Part {
     private int playerTwoResult;
     private int playerThreeResult;
     private int playerFourResult;
+    private int playerFiveResult;
     @ManyToOne
     private Player crupper;
     @ManyToOne

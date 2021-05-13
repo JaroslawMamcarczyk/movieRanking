@@ -1,4 +1,5 @@
 package com.mamra.start.remik.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
@@ -26,6 +27,7 @@ public class Game {
     private Player playerFour;
     @ManyToOne
     private Player playerFive;
+    @JsonIgnore
     @OneToMany(mappedBy = "gamePart")
     private List<Part> partList;
 }
